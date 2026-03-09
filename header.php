@@ -33,7 +33,7 @@
           <li class="nav-item"><a class="nav-link about-link" href="aboutUs.php">About</a></li>
           <li class="nav-item"><a class="nav-link contact-link" href="contactUs.php">Contact</a></li>
         </ul>
-        <a href="#" class="btn btn-sign"><i class="far fa-user me-2"></i>Sign in</a>
+        <a href="register.html" class="btn btn-sign"><i class="far fa-user me-2"></i>Sign in</a>
       </div>
     </div>
   </nav>

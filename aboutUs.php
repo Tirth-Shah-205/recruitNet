@@ -216,7 +216,7 @@ require_once 'header.php';
       <div class="cta-content">
         <h2 class="cta-title" data-aos="fade-up">Ready To <span>Transform</span> Your Hiring?</h2>
         <p class="cta-description" data-aos="fade-up" data-aos-delay="100">Join 86,000+ companies who've found their perfect matches through RecruitNet.</p>
-        <a href="#" class="cta-button" data-aos="zoom-in" data-aos-delay="200">Get Started Today <i class="fas fa-arrow-right ms-2"></i></a>
+        <a href="register.html" class="cta-button" data-aos="zoom-in" data-aos-delay="200">Get Started Today <i class="fas fa-arrow-right ms-2"></i></a>
       </div>
     </div>
   </section>
