@@ -16,6 +16,8 @@
    <link rel="stylesheet" href="contactUs.css">
    <link rel="stylesheet" href="aboutUs.css">
   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="candidateProfileManager.css">
+   <link rel="stylesheet" href="candidateHomePage.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
