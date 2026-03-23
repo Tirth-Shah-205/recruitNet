@@ -29,7 +29,7 @@
                         <li class="active"><a href="#"><i class="fas fa-user-circle"></i> My Resume</a></li>
                         <li><a href="#"><i class="fas fa-file-alt"></i> Manage Applications</a></li>
                        <!--  <li><a href="#"><i class="fas fa-clock"></i> Job Alerts</a></li> -->
-                        <li><a href="#"><i class="fas fa-key"></i> Change Password</a></li>
+                        <li><a href="forgotPassword.html"><i class="fas fa-key"></i> Change Password</a></li>
                     </ul>
                     <div class="sign-out">
                         <a href="#"><i class="fas fa-sign-out-alt"></i> Sign Out</a>

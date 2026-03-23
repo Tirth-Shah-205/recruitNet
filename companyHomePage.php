@@ -45,7 +45,20 @@
                     </button>
                 </div>
                 <div class="col-lg-5 text-center mt-5 mt-lg-0">
-                    <i class="fas fa-building" style="font-size:9rem;color:rgba(10,59,91,0.08);"></i>
+                    <div class="hero-logo-container">
+                        <!-- Balloon circles (5 pieces) -->
+                        <div class="balloon-circle" style="top: 10%; left: 5%; width: 30px; height: 30px; background: #FF7A3D; animation-delay: 0s;"></div>
+                        <div class="balloon-circle" style="top: 60%; left: 80%; width: 45px; height: 45px; background: #0A3B5B; animation-delay: 1.2s;"></div>
+                        <div class="balloon-circle" style="top: 20%; left: 70%; width: 25px; height: 25px; background: #FFB347; animation-delay: 0.5s;"></div>
+                        <div class="balloon-circle" style="top: 70%; left: 15%; width: 35px; height: 35px; background: #4A90E2; animation-delay: 2s;"></div>
+                        <div class="balloon-circle" style="top: 40%; left: 40%; width: 50px; height: 50px; background: #FF7A3D; opacity: 0.2; animation-delay: 0.8s;"></div>
+
+                        <!-- Large floating text logo: RecruitNet -->
+                        <div class="floating-text-logo">
+                            <span class="recruit-part">Recruit</span><span class="net-part">Net</span>
+                        </div>
+                    </div>
+                    <!-- <i class="fas fa-building" style="font-size:9rem;color:rgba(10,59,91,0.08);"></i> -->
                 </div>
             </div>
         </div>
@@ -160,5 +173,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/companyHomePage.js"></script>
 </body>
 </html>
