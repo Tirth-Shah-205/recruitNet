@@ -1,33 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>RecruitNet • Recruiter Home</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap + Icons + Fonts -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/companyHomePage.css">
-</head>
-
-<body>
-
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Recruit<span>Net</span></a>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Post Job</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Talent</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Company</a></li>
-            </ul>
-        </div>
-    </nav>
+<?php
+require_once "header.php";
+?>
 
     <!-- HERO -->
     <section class="hero">

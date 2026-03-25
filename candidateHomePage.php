@@ -1,44 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RecruitNet • exact Joblet inspired • perfect color</title>
-    <!-- Bootstrap 5 + icons + Google Fonts (Poppins + Inter) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-    <!-- AOS for scroll animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Your existing CSS (no changes) -->
-    <link rel="stylesheet" href="css/candidateHomePage.css">
-    <link rel="stylesheet" href="css/index.css">
-</head>
-
-<body>
-    <!-- ========== NAVBAR (Joblet style) ========== -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Recruit<span>Net</span></a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMain">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navMain">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Jobs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Companies</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contactUs.php">Contact</a></li>
-                </ul>
-                <a href="candidateProfileManager.php" class="btn btn-sign"><i class="far fa-user me-2"></i>Profile</a>
-            </div>
-        </div>
-    </nav>
-
+<?php
+require_once "header.php";
+?>
     <!-- ========== HERO (exact Joblet match) ========== -->
     <!-- HOME PAGE -->
 <div id="home-page">

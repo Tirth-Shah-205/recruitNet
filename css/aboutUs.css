@@ -161,7 +161,7 @@
     @keyframes progress { to { width: 100%; } }
 
     /* ===== NAVBAR (Joblet style, enhanced) ===== */
-    .navbar {
+    /*.navbar {
       background: rgba(255,255,255,0.95);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -245,7 +245,7 @@
       color: white;
       border-color: transparent;
     }
-    .btn-sign:hover::before { left: 0; }
+    .btn-sign:hover::before { left: 0; }*/
 
     /* ===== HERO SECTION (cinematic, no initial animation) ===== */
     .about-hero {
