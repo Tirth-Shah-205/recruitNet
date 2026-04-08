@@ -135,3 +135,32 @@ ADD COLUMN company_id INT NOT NULL UNIQUE AFTER id,
 ADD CONSTRAINT fk_jobs_company
 FOREIGN KEY (company_id) REFERENCES companies(id)
 ON DELETE CASCADE;
+
+--create applications table to store job applications by candidatess
+CREATE TABLE applications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    job_id INT NOT NULL,
+    candidate_id INT NOT NULL,
+    company_id INT NOT NULL,
+
+    status ENUM('applied','shortlisted','rejected','hired') DEFAULT 'applied',
+
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_app_job
+        FOREIGN KEY (job_id) REFERENCES jobs(id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_app_candidate
+        FOREIGN KEY (candidate_id) REFERENCES candidates(id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_app_company
+        FOREIGN KEY (company_id) REFERENCES companies(id)
+        ON DELETE CASCADE
+);
+
+--adding status column to jobs table to indicate whether the job is open, paused or closed
+ALTER TABLE jobs
+ADD COLUMN status ENUM('open','paused','closed') DEFAULT 'open';

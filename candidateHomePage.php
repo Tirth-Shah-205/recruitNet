@@ -1,7 +1,7 @@
 <?php
 require_once "header.php";
 require "connection.php";
-$sql = "SELECT * FROM jobs ORDER BY created_at DESC LIMIT 4";
+$sql = "SELECT * FROM jobs where status='open' ORDER BY created_at DESC LIMIT 4";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 

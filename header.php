@@ -70,11 +70,11 @@ if($role  === 'candidate') {
           <?php if ($role === "candidate") { ?>
               <li class="nav-item"><a class="nav-link" href="exploreJob.php">Jobs</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Companies</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
+              <li class="nav-item"><a class="nav-link" href="resources.php">Resources</a></li>
           <?php } ?>
           <?php if ($role === "company") { ?>
               <li class="nav-item"><a class="nav-link" href="postJob.php">Post Job</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Talent</a></li>
+              <li class="nav-item"><a class="nav-link" href="talent.php">Talent</a></li>
               <li class="nav-item"><a class="nav-link" href="companyDashboard.php">Dashboard</a></li>
           <?php } ?>
 

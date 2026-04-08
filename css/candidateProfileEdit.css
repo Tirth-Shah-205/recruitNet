@@ -90,3 +90,24 @@ font-weight:bold;
     flex: 1;
     min-width: 0;
 }
+
+.btn-update:hover {
+    background-color: var(--primary-blue) !important;
+    color: #fff !important;
+}
+
+.btn-update {
+    background-color: var(--accent-orange) !important;
+    color: #fff !important;
+    transition: background-color 0.3s !important; /* Smooth transition */
+}
+
+.resume-link {
+    color: var(--accent-orange) !important; /* Default color */
+    text-decoration: none !important;
+    transition: color 0.3s ease !important; /* Smooth transition */
+}
+
+.resume-link:hover {
+    color: var(--primary-blue) !important; /* Change color on hover */
+}

@@ -181,14 +181,14 @@ value="<?= $candidate['portfolio'] ?>">
 <div class="mt-2">
 <a href="uploads/candidate_resume/<?= $candidate['resume'] ?>"
 target="_blank"
-class="text-decoration-none">
+class="text-decoration-none resume-link">
 <i class="fas fa-file-pdf text-danger"></i>
 View Current Resume
 </a>
 </div>
 <?php endif; ?>
 <div class="text-center mt-5">
-<button class="btn btn-primary px-5">Update Profile</button>
+<button class="btn px-5 btn-update" >Update Profile</button>
 </div>
 
 

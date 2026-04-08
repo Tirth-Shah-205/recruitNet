@@ -146,8 +146,16 @@ echo "<script>alert('Job Posted Successfully'); window.location.href='companyHom
     
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" name="experience" class="form-control" placeholder="Experience">
-                                    <label><i class="fas fa-user-tie"></i> Experience</label>
+                                    <!-- <input type="text" name="experience" class="form-control" placeholder="Experience"> -->
+                                    <!-- <label><i class="fas fa-user-tie"></i> Experience</label> -->
+                                    <select name="experience" class="form-select" required>
+                                        <option value="">Experience</option>
+                                        <option value="Fresher">Fresher</option>
+                                        <option value="1-3 years">1-3 years</option>
+                                        <option value="3-5 years">3-5 years</option>
+                                        <option value="5-8 years">5-8 years</option>
+                                        <option value="8+ years">8+ years</option>
+                                    </select>
                                 </div>
                             </div>
     

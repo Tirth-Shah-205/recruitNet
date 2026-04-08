@@ -2,7 +2,7 @@
 require_once "header.php";
 
 require "connection.php";
-$sql = "SELECT * FROM jobs";
+$sql = "SELECT * FROM jobs where status='open' ORDER BY created_at DESC";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 
