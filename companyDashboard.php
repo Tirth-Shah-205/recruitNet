@@ -13,6 +13,8 @@ $shortlisted = $conn->query("SELECT COUNT(*) FROM applications WHERE company_id=
 
 $interviews = $conn->query("SELECT COUNT(*) FROM applications WHERE company_id='$company_id' AND status='interview'")->fetchColumn();
 
+$company_name = $conn->query("SELECT company_name FROM companies WHERE id='$company_id'")->fetchColumn();
+
 /* Jobs Table */
 $jobs = $conn->query("
 SELECT j.title,j.status,COUNT(a.id) as total
@@ -40,7 +42,7 @@ require_once "header.php";
 <!-- HEADER -->
 <section class="dashboard-header">
     <div class="container">
-        <h1>Welcome back, <span>Acme Corp</span></h1>
+        <h1>Welcome back, <span><?php echo $company_name; ?></span></h1>
         <p class="text-muted fs-5">Here’s what’s happening with your hiring today</p>
     </div>
 </section>
@@ -96,18 +98,18 @@ require_once "header.php";
 <section class="pb-5">
     <div class="container">
         <div class="row g-4">
-            <div class="col-md-3">
+            <a href="postJob.php" class="col-md-3" style="text-decoration:none; color:#1E2C3A">
                 <div class="action-card">
                     <i class="fas fa-plus-circle"></i>
                     <h5>Post a Job</h5>
                 </div>
-            </div>
-            <div class="col-md-3">
+            </a>
+            <a href="manageJobs.php" class="col-md-3" style="text-decoration:none; color:#1E2C3A">
                 <div class="action-card">
                     <i class="fas fa-user-check"></i>
                     <h5>View Applicants</h5>
                 </div>
-            </div>
+            </a>
             <div class="col-md-3">
                 <div class="action-card">
                     <i class="fas fa-search"></i>

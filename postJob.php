@@ -68,8 +68,8 @@ echo "<script>alert('Job Posted Successfully'); window.location.href='companyHom
     </head>
     
     <body> -->
-    
-    <div class="container-fluid">
+    <?php require_once "header.php"; ?>
+    <div class="container-fluid" style="padding: 140px 0 90px;">
         <div class="row min-vh-100">
     
             <!-- LEFT SIDE (INFO PANEL) -->
@@ -203,6 +203,6 @@ echo "<script>alert('Job Posted Successfully'); window.location.href='companyHom
     <script src="js/postJob.js"></script>
     <!-- </body>
     </html> -->
-
+    <?php require_once "footer.php"; ?>
 </body>
 </html>

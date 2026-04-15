@@ -52,7 +52,7 @@ font-weight:600;
 
 <h3 class="text-center">Admin Login</h3>
 
-<form action="login_process.php" method="POST">
+<form action="dashboard.php" method="POST">
 
 <div class="mb-3">
 <label>Username</label>

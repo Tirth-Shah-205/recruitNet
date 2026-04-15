@@ -53,14 +53,14 @@ if (isset($_GET['status'])) {
         <div class="contact-info-card">
           <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
           <h4>Call us</h4>
-          <p><a href="tel:+9876543210 ">9876543210</a><br><a href="tel:+9876543210">+9876543210</a></p>
+          <p><a href="tel:+919876543210">+91 9876543210</a><br></p>
         </div>
       </div>
       <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
         <div class="contact-info-card">
           <div class="contact-icon"><i class="fas fa-envelope"></i></div>
           <h4>Email</h4>
-          <p><a href="mailto:hello@recruitnet.com">Ayushiba@recruitnet.com</a><br><a href="mailto:support@recruitnet.com">zala@recruitnet.com</a></p>
+          <p><a href="mailto:support@recruitnet.com">support@recruitnet.com</a><br></p>
         </div>
       </div>
       <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
