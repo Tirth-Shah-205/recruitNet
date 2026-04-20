@@ -1,0 +1,86 @@
+.admin-content {
+    margin-left: 268px;
+    padding: 40px;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.page-header {
+    background: white;
+    padding: 28px 32px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px -10px rgba(10, 59, 91, 0.1);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-table {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -15px rgba(10, 59, 91, 0.12);
+    padding: 10px;
+}
+
+.table th {
+    background: #0A3B5B;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    padding: 20px 25px;
+}
+
+.table td {
+    padding: 22px 25px;
+    vertical-align: middle;
+    color: #334155;
+}
+
+.candidate-row:hover {
+    background: #f8fafc;
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+}
+
+.skill-badge {
+    background: rgba(255, 122, 61, 0.1);
+    color: #FF7A3D;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-right: 6px;
+}
+
+.action-btn {
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.search-box {
+    width: 380px;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 24px;
+    font-size: 1rem;
+}
+
+.top-stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.mini-stat {
+    background: white;
+    padding: 18px 24px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(10,59,91,0.06);
+    flex: 1;
+}

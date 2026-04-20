@@ -1,0 +1,45 @@
+.settings-card {
+    background: white;
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 15px 35px -10px rgba(10, 59, 91, 0.08);
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.settings-card:hover {
+    box-shadow: 0 20px 40px -12px rgba(10, 59, 91, 0.15);
+    transform: translateY(-3px);
+}
+
+.premium-input {
+    border-radius: 12px;
+    padding: 14px 20px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.premium-input:focus {
+    background: white;
+    border-color: #0f172a;
+    box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.1);
+}
+
+.premium-label {
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+}
