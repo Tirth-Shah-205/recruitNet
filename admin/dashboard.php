@@ -1,156 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Admin Dashboard</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/index.css">
-<link rel="stylesheet" href="css/admin.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentForge • Admin Dashboard</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="css/admin.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
-
 <body>
-<?php include 'sidebar.php'; ?>
+    <?php include 'sidebar.php'; ?>
 
-<div class="admin-main">
+    <div class="admin-content">
+        
+        <!-- Premium Topbar -->
+        <div class="glass-topbar d-flex justify-content-between align-items-center p-4 rounded-4 mb-5">
+            <div class="d-flex align-items-center gap-3">
+                <h3 class="mb-0 fw-bold" style="color:#0f172a;">Dashboard</h3>
+            </div>
+            
+            <div class="d-flex align-items-center gap-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="admin-avatar fw-bold fs-4" style="background:linear-gradient(135deg,#f97316,#fb923c); width:52px;height:52px;border-radius:50%; display:flex;align-items:center;justify-content:center;color:white;">A</div>
+                    <div>
+                        <div class="fw-semibold">Ayushi Zala</div>
+                        <small class="text-muted">Super Admin</small>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="admin-header">
-    <h2>Admin Dashboard</h2>
-    <div>Welcome, Admin</div>
-</div>
+        <!-- Stats -->
+        <div class="row g-4 mb-5">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card p-5 h-100">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h2 class="fw-bold mb-1 text-dark">1,847</h2>
+                            <p class="text-muted mb-0">Total Candidates</p>
+                        </div>
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    </div>
+                    <div class="mt-4 text-success fw-medium">↑ 28% this month</div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card p-5 h-100">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h2 class="fw-bold mb-1 text-dark">124</h2>
+                            <p class="text-muted mb-0">Active Companies</p>
+                        </div>
+                        <div class="stat-icon"><i class="fas fa-building"></i></div>
+                    </div>
+                    <div class="mt-4 text-success fw-medium">↑ 12% this month</div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card p-5 h-100">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h2 class="fw-bold mb-1 text-dark">672</h2>
+                            <p class="text-muted mb-0">Jobs Posted</p>
+                        </div>
+                        <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+                    </div>
+                    <div class="mt-4 text-danger fw-medium">↓ 4% this month</div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card p-5 h-100">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h2 class="fw-bold mb-1 text-dark">3,291</h2>
+                            <p class="text-muted mb-0">Applications</p>
+                        </div>
+                        <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+                    </div>
+                    <div class="mt-4 text-success fw-medium">↑ 47% this month</div>
+                </div>
+            </div>
+        </div>
 
-<!-- Stats Cards -->
-<div class="admin-cards">
+        <!-- Charts -->
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="chart-container">
+                    <h5 class="fw-semibold mb-4">Applications Trend • Last 6 Months</h5>
+                    <canvas id="appChart" height="140"></canvas>
+                </div>
+            </div>
+            
+            <div class="col-lg-5">
+                <div class="chart-container h-100">
+                    <h5 class="fw-semibold mb-4">Jobs by Category</h5>
+                    <canvas id="categoryChart" height="140"></canvas>
+                </div>
+            </div>
+        </div>
 
-<div class="admin-card">
-<h3>120</h3>
-<p>Total Candidates</p>
-</div>
+        <div class="row g-4 mt-4">
+            <div class="col-lg-6">
+                <div class="chart-container">
+                    <h5 class="fw-semibold mb-4">Candidate Growth</h5>
+                    <canvas id="candidateChart" height="140"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="chart-container">
+                    <h5 class="fw-semibold mb-4">Companies Joined</h5>
+                    <canvas id="companyChart" height="140"></canvas>
+                </div>
+            </div>
+        </div>
 
-<div class="admin-card">
-<h3>45</h3>
-<p>Companies</p>
-</div>
+        <!-- Recent Activity -->
+        <div class="chart-container mt-5">
+            <h5 class="fw-semibold mb-4">Recent Activity</h5>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Activity</th>
+                            <th>Details</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><small>Just now</small></td>
+                            <td>New Application</td>
+                            <td>Senior Developer @ TechCorp</td>
+                            <td><span class="badge bg-success">Shortlisted</span></td>
+                        </tr>
+                        <tr>
+                            <td><small>27 min ago</small></td>
+                            <td>Company Onboarded</td>
+                            <td>Flipkart HR Team</td>
+                            <td><span class="badge bg-primary">Approved</span></td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-<div class="admin-card">
-<h3>210</h3>
-<p>Jobs Posted</p>
-</div>
-
-<div class="admin-card">
-<h3>560</h3>
-<p>Applications</p>
-</div>
-
-</div>
-
-
-<!-- Charts Row 1 -->
-<div class="admin-chart-grid">
-
-<div class="admin-card">
-<div class="chart-header">
-<h5>Applications per Month</h5>
-<a href="applications.php" class="btn-view">View All</a>
-</div>
-<canvas id="applicationsChart"></canvas>
-</div>
-
-<div class="admin-card">
-<div class="chart-header">
-<h5>Jobs by Category</h5>
-<a href="jobs.php" class="btn-view">View All</a>
-</div>
-<canvas id="jobsChart"></canvas>
-</div>
-
-</div>
-
-
-<!-- Charts Row 2 -->
-<div class="admin-chart-grid">
-
-<div class="admin-card">
-<div class="chart-header">
-<h5>Candidates Growth</h5>
-<a href="candidates.php" class="btn-view">View All</a>
-</div>
-<canvas id="candidateChart"></canvas>
-</div>
-
-<div class="admin-card">
-<div class="chart-header">
-<h5>Companies Joined</h5>
-<a href="companies.php" class="btn-view">View All</a>
-</div>
-<canvas id="companyChart"></canvas>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-
-/* Applications Chart */
-new Chart(document.getElementById('applicationsChart'), {
-type: 'bar',
-data: {
-labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-datasets: [{
-label: 'Applications',
-data: [12,19,3,5,8,10],
-borderWidth: 1
-}]
-},
-options: { responsive:true }
-});
-
-
-/* Jobs Chart */
-new Chart(document.getElementById('jobsChart'), {
-type: 'pie',
-data: {
-labels: ['IT','Finance','Marketing','HR'],
-datasets: [{
-data: [15,8,10,6]
-}]
-}
-});
-
-
-/* Candidates Chart */
-new Chart(document.getElementById('candidateChart'), {
-type: 'line',
-data: {
-labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-datasets: [{
-label:'Candidates',
-data:[5,10,8,15,12,18],
-fill:false,
-tension:0.3
-}]
-}
-});
-
-
-/* Companies Chart */
-new Chart(document.getElementById('companyChart'), {
-type: 'bar',
-data: {
-labels:['Jan','Feb','Mar','Apr','May','Jun'],
-datasets:[{
-label:'Companies',
-data:[2,4,3,6,5,7]
-}]
-}
-});
-
-</script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
