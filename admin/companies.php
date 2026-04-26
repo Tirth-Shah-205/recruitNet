@@ -1,3 +1,12 @@
+<?php
+include '../DBConnection.php'; // Adjust path as needed
+$query = "SELECT c.id, c.company_name, c.email, c.phone, c.created_at,
+                 cp.industry, cp.company_size, cp.logo, cp.headquarters
+          FROM companies c 
+          LEFT JOIN company_profiles cp ON c.id = cp.company_id 
+          ORDER BY c.created_at DESC";
+$result = $conn->query($query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +60,7 @@
 
         <!-- Main Table -->
         <div class="admin-table">
-            <table class="table table-hover mb-0">
+            <table id="companiesTable" class="table table-hover mb-0">
                 <thead>
                     <tr>
                         <th width="35%">Company Name</th>
@@ -61,29 +70,36 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php while($row = $result->fetch_assoc()): ?>
                     <tr class="company-row">
                         <td>
                             <div class="d-flex align-items-center gap-3">
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width:45px;height:45px;font-weight:700;">A</div>
+                                <img src="<?php echo $row['logo'] ?: '../uploads/default-logo.png'; ?>" 
+                                    class="rounded-circle" style="width:45px;height:45px;object-fit:cover;">
                                 <div>
-                                    <strong>ABC Pvt Ltd</strong><br>
-                                    <small class="text-muted">Technology Sector</small>
+                                    <strong><?php echo htmlspecialchars($row['company_name']); ?></strong><br>
+                                    <small class="text-muted"><?php echo htmlspecialchars($row['industry']); ?></small>
                                 </div>
                             </div>
                         </td>
-                        <td>abc@gmail.com</td>
-                        <td><span class="badge bg-success px-3 py-2 status-badge status-verified text-white">Active</span></td>
+                        <td><?php echo htmlspecialchars($row['email']); ?></td>
+                        <!-- <td><?php echo htmlspecialchars($row['headquarters']); ?></td>
+                        <td><?php echo htmlspecialchars($row['company_size']); ?> employees</td> -->
+                        <td><span class="badge bg-success px-3 py-2">Active</span></td>
                         <td>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary action-btn" title="View Profile">
+                                <button class="btn btn-sm btn-outline-primary action-btn" 
+                                        onclick="viewCompany(<?php echo $row['id']; ?>)">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-danger action-btn" title="Delete">
+                                <button class="btn btn-sm btn-outline-danger action-btn" 
+                                        onclick="deleteCompany(<?php echo $row['id']; ?>)">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </td>
                     </tr>
+                    <?php endwhile; ?>
                 </tbody>
             </table>
         </div>
@@ -91,15 +107,7 @@
         <!-- Pagination -->
         <div class="d-flex justify-content-center align-items-center mt-5 mb-3">
             <nav>
-                <ul class="pagination mb-0">
-                    <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><i class="fas fa-chevron-left me-1"></i> Prev</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#">12</a></li>
-                    <li class="page-item"><a class="page-link" href="#" aria-label="Next">Next <i class="fas fa-chevron-right ms-1"></i></a></li>
-                </ul>
+                <ul id="companyPagination" class="pagination mb-0"></ul>
             </nav>
         </div>
     </div>

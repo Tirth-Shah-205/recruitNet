@@ -1,3 +1,13 @@
+<?php
+include '../DBConnection.php'; // Adjust path as needed
+// Fetch candidates with profile data
+$query = "SELECT c.id, c.name, c.email, c.phone, c.created_at, 
+                 p.job_title, p.skills, p.location, p.profile_pic
+          FROM candidates c 
+          LEFT JOIN profiles p ON c.id = p.candidate_id 
+          ORDER BY c.created_at DESC";
+$result = $conn->query($query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +67,7 @@
 
         <!-- Main Table -->
         <div class="admin-table">
-            <table class="table table-hover mb-0">
+            <table id="candidatesTable" class="table table-hover mb-0">
                 <thead>
                     <tr>
                         <th width="25%">Candidate Name</th>
@@ -67,62 +77,45 @@
                         <th width="10%">Actions</th>
                     </tr>
                 </thead>
+                <!-- In the table body, replace static rows with: -->
                 <tbody>
+                    <?php while($row = $result->fetch_assoc()): ?>
                     <tr class="candidate-row">
                         <td>
                             <div class="d-flex align-items-center gap-3">
-                                <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center" style="width:45px;height:45px;font-weight:700;">JD</div>
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" 
+                                    style="width:45px;height:45px;font-weight:700;background-image: url('<?php echo $row['profile_pic'] ?: '../uploads/default-avatar.png'; ?>'); background-size: cover;">
+                                    <?php echo strtoupper(substr($row['name'], 0, 2)); ?>
+                                </div>
                                 <div>
-                                    <strong>John Doe</strong><br>
-                                    <small class="text-muted">Mumbai, India</small>
+                                    <strong><?php echo htmlspecialchars($row['name']); ?></strong><br>
+                                    <small class="text-muted"><?php echo htmlspecialchars($row['location']); ?></small>
                                 </div>
                             </div>
                         </td>
-                        <td>john.doe@email.com</td>
+                        <td><?php echo htmlspecialchars($row['email']); ?></td>
                         <td>
-                            <span class="skill-badge">PHP</span>
-                            <span class="skill-badge">JavaScript</span>
-                            <span class="skill-badge">Laravel</span>
+                            <?php
+                            $skills = explode(',', $row['skills']);
+                            foreach(array_slice($skills, 0, 3) as $skill): ?>
+                                <span class="skill-badge"><?php echo htmlspecialchars(trim($skill)); ?></span>
+                            <?php endforeach; ?>
                         </td>
-                        <td><span class="badge bg-success px-3 py-2">Verified</span></td>
+                        <td><span class="badge bg-success px-3 py-2">Active</span></td>
                         <td>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary action-btn" title="View Profile">
+                                <button class="btn btn-sm btn-outline-primary action-btn" title="View Profile"
+                                        onclick="viewCandidate(<?php echo $row['id']; ?>)">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-danger action-btn" title="Delete">
+                                <button class="btn btn-sm btn-outline-danger action-btn" title="Delete"
+                                        onclick="deleteCandidate(<?php echo $row['id']; ?>)">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </td>
                     </tr>
-                    
-                    <!-- More sample rows -->
-                    <tr class="candidate-row">
-                        <td>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center" style="width:45px;height:45px;font-weight:700;">SP</div>
-                                <div>
-                                    <strong>Sneha Patel</strong><br>
-                                    <small class="text-muted">Ahmedabad, India</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td>sneha.patel@gmail.com</td>
-                        <td>
-                            <span class="skill-badge">React</span>
-                            <span class="skill-badge">Node.js</span>
-                        </td>
-                        <td><span class="badge bg-warning px-3 py-2">Pending</span></td>
-                        <td>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary action-btn"><i class="fas fa-eye"></i></button>
-                                <button class="btn btn-sm btn-outline-danger action-btn"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- You can add more rows here -->
+                    <?php endwhile; ?>
                 </tbody>
             </table>
         </div>
@@ -130,15 +123,7 @@
         <!-- Pagination -->
         <div class="d-flex justify-content-center align-items-center mt-5 mb-3">
             <nav>
-                <ul class="pagination mb-0">
-                    <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><i class="fas fa-chevron-left me-1"></i> Prev</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#">12</a></li>
-                    <li class="page-item"><a class="page-link" href="#" aria-label="Next">Next <i class="fas fa-chevron-right ms-1"></i></a></li>
-                </ul>
+                <ul id="candidatePagination" class="pagination mb-0"></ul>
             </nav>
         </div>
     </div>

@@ -1,3 +1,16 @@
+<?php
+include '../DBConnection.php'; // Adjust path as needed
+$query = "SELECT a.id, a.status, a.applied_at,
+                 j.title as job_title, j.location,
+                 cand.name as candidate_name, cand.email as candidate_email,
+                 comp.company_name
+          FROM applications a 
+          JOIN jobs j ON a.job_id = j.id 
+          JOIN candidates cand ON a.candidate_id = cand.id 
+          JOIN companies comp ON a.company_id = comp.id 
+          ORDER BY a.applied_at DESC";
+$result = $conn->query($query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +65,7 @@
 
         <!-- Main Table -->
         <div class="admin-table">
-            <table class="table table-hover mb-0">
+            <table id="applicationsTable" class="table table-hover mb-0">
                 <thead>
                     <tr>
                         <th width="30%">Candidate Name</th>
@@ -63,65 +76,38 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php while($row = $result->fetch_assoc()): ?>
                     <tr class="application-row">
+                        <td><?php echo htmlspecialchars($row['candidate_name']); ?></td>
+                        <td><?php echo htmlspecialchars($row['job_title']); ?></td>
+                        <td><?php echo htmlspecialchars($row['company_name']); ?></td>
+                        <!-- <td><?php echo htmlspecialchars($row['applied_at']); ?></td> -->
                         <td>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center" style="width:45px;height:45px;font-weight:700;">JD</div>
-                                <div>
-                                    <strong>John Doe</strong><br>
-                                    <small class="text-muted">Applied 2 hrs ago</small>
-                                </div>
-                            </div>
+                            <span class="badge <?php 
+                                echo $row['status'] == 'applied' ? 'bg-primary' : 
+                                    ($row['status'] == 'shortlisted' ? 'bg-warning' : 
+                                    ($row['status'] == 'hired' ? 'bg-success' : 'bg-danger')); 
+                                ?> px-3 py-2">
+                                <?php echo ucfirst($row['status']); ?>
+                            </span>
                         </td>
-                        <td>
-                            <strong>PHP Developer</strong><br>
-                            <small class="text-muted">Full Time</small>
-                        </td>
-                        <td>
-                            <div>ABC Ltd</div>
-                        </td>
-                        <td><span class="badge bg-warning px-3 py-2 status-badge status-pending text-dark">Pending</span></td>
                         <td>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary action-btn" title="Review">
+                                <button class="btn btn-sm btn-outline-primary action-btn" 
+                                        onclick="viewApplication(<?php echo $row['id']; ?>)">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-success action-btn" title="Accept">
-                                    <i class="fas fa-check"></i>
-                                </button>
+                                <select class="form-select form-select-sm" 
+                                        onchange="updateApplicationStatus(<?php echo $row['id']; ?>, this.value)">
+                                    <option value="applied" <?php echo $row['status']=='applied'?'selected':''; ?>>Applied</option>
+                                    <option value="shortlisted" <?php echo $row['status']=='shortlisted'?'selected':''; ?>>Shortlisted</option>
+                                    <option value="rejected" <?php echo $row['status']=='rejected'?'selected':''; ?>>Rejected</option>
+                                    <option value="hired" <?php echo $row['status']=='hired'?'selected':''; ?>>Hired</option>
+                                </select>
                             </div>
                         </td>
                     </tr>
-                    
-                    <tr class="application-row">
-                        <td>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center" style="width:45px;height:45px;font-weight:700;">AS</div>
-                                <div>
-                                    <strong>Alice Smith</strong><br>
-                                    <small class="text-muted">Applied 1 day ago</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <strong>UI/UX Designer</strong><br>
-                            <small class="text-muted">Contract</small>
-                        </td>
-                        <td>
-                            <div>TechCorp Inc.</div>
-                        </td>
-                        <td><span class="badge bg-success px-3 py-2 status-badge status-verified text-white">Accepted</span></td>
-                        <td>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary action-btn" title="Review">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn btn-sm btn-outline-success action-btn" title="Accept" disabled>
-                                    <i class="fas fa-check"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php endwhile; ?>
                 </tbody>
             </table>
         </div>
@@ -129,15 +115,7 @@
         <!-- Pagination -->
         <div class="d-flex justify-content-center align-items-center mt-5 mb-3">
             <nav>
-                <ul class="pagination mb-0">
-                    <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><i class="fas fa-chevron-left me-1"></i> Prev</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#">12</a></li>
-                    <li class="page-item"><a class="page-link" href="#" aria-label="Next">Next <i class="fas fa-chevron-right ms-1"></i></a></li>
-                </ul>
+                <ul id="applicationPagination" class="pagination mb-0"></ul>
             </nav>
         </div>
     </div>
