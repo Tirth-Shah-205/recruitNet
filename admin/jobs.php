@@ -1,3 +1,13 @@
+<?php
+include '../DBConnection.php'; // Adjust path as needed
+// Fetch jobs with company info
+$query = "SELECT j.id, j.title, j.location, j.job_type, j.salary, j.status, j.created_at,
+                 c.company_name, c.email as company_email
+          FROM jobs j 
+          JOIN companies c ON j.company_id = c.id 
+          ORDER BY j.created_at DESC";
+$result = $conn->query($query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,71 +61,51 @@
 
         <!-- Main Table -->
         <div class="admin-table">
-            <table class="table table-hover mb-0">
+            <table id="jobsTable" class="table table-hover mb-0">
                 <thead>
                     <tr>
-                        <th width="35%">Job Title</th>
-                        <th width="25%">Company</th>
-                        <th width="20%">Location / Type</th>
+                        <th width="20%">Job Title</th>
+                        <th width="20%">Company</th>
+                        <th width="20%">Location</th>
+                        <th width="10%">Type</th>
+                        <th width="10%">Status</th>
                         <th width="20%">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php while($row = $result->fetch_assoc()): ?>
                     <tr class="job-row">
+                        <td><?php echo htmlspecialchars($row['title']); ?></td>
+                        <td><?php echo htmlspecialchars($row['company_name']); ?></td>
+                        <td><?php echo htmlspecialchars($row['location']); ?></td>
+                        <td><?php echo htmlspecialchars($row['job_type']); ?></td>
+                        <!-- <td><?php echo htmlspecialchars($row['salary']); ?></td> -->
                         <td>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width:45px;height:45px;font-weight:700;"><i class="fas fa-code"></i></div>
-                                <div>
-                                    <strong>Senior PHP Developer</strong><br>
-                                    <small class="text-muted">Posted 2 days ago</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <strong>ABC Ltd</strong><br>
-                            <small class="text-muted">Technology Sector</small>
-                        </td>
-                        <td>
-                            <div>Ahmedabad, India</div>
-                            <span class="badge bg-light text-dark border mt-1">Full Time</span>
+                            <span class="badge <?php 
+                                echo $row['status'] == 'open' ? 'bg-success' : 
+                                    ($row['status'] == 'paused' ? 'bg-warning' : 'bg-danger'); 
+                                ?> px-3 py-2">
+                                <?php echo ucfirst($row['status']); ?>
+                            </span>
                         </td>
                         <td>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary action-btn" title="View Job">
+                                <button class="btn btn-sm btn-outline-primary action-btn" 
+                                        onclick="viewJob(<?php echo $row['id']; ?>)">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-danger action-btn" title="Delete">
+                                <button class="btn btn-sm btn-outline-warning action-btn" 
+                                        onclick="editJobStatus(<?php echo $row['id']; ?>, '<?php echo $row['status']; ?>')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger action-btn" 
+                                        onclick="deleteJob(<?php echo $row['id']; ?>)">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </td>
                     </tr>
-                    
-                    <tr class="job-row">
-                        <td>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center" style="width:45px;height:45px;font-weight:700;"><i class="fas fa-paint-brush"></i></div>
-                                <div>
-                                    <strong>UI/UX Designer</strong><br>
-                                    <small class="text-muted">Posted 5 days ago</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <strong>TechCorp Inc.</strong><br>
-                            <small class="text-muted">Software Development</small>
-                        </td>
-                        <td>
-                            <div>Remote</div>
-                            <span class="badge bg-light text-dark border mt-1">Contract</span>
-                        </td>
-                        <td>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary action-btn"><i class="fas fa-eye"></i></button>
-                                <button class="btn btn-sm btn-outline-danger action-btn"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php endwhile; ?>
                 </tbody>
             </table>
         </div>
@@ -123,15 +113,7 @@
         <!-- Pagination -->
         <div class="d-flex justify-content-center align-items-center mt-5 mb-3">
             <nav>
-                <ul class="pagination mb-0">
-                    <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><i class="fas fa-chevron-left me-1"></i> Prev</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#">12</a></li>
-                    <li class="page-item"><a class="page-link" href="#" aria-label="Next">Next <i class="fas fa-chevron-right ms-1"></i></a></li>
-                </ul>
+                <ul id="jobPagination" class="pagination mb-0"></ul>
             </nav>
         </div>
     </div>

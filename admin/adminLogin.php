@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+    session_start();
+    include '../DBConnection.php'; // Adjust path as needed
+?>
 
 <!DOCTYPE html>
 <html lang="en">
